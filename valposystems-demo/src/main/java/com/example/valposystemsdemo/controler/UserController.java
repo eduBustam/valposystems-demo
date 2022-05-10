@@ -10,7 +10,42 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/user")
+
 public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping()
+    public ArrayList<UserModel> findUsers(){
+        return userService.findUsers();
+    }
+    @DeleteMapping(path= "/{id}")
+    public String deleteUserById (@PathVariable("id")Long id){
+        boolean ok=this.userService.deleteUser(id);
+        if(ok){
+            return "Se eliminó el user con id "+ id;
+        }else{
+            return "No se pudo eliminar el user con id" + id;
+        }
+    }
+    @PostMapping()
+    public UserModel saveUser(@RequestBody UserModel user){
+        return this.userService.saveUser(user);
+    }
+    @PutMapping(path="/{id}")
+    public String updateUser(@RequestBody UserModel user){
+        boolean ok=this.userService.putUser(user);
+        if(ok){
+            return "Se edito el user con id "+ user.getId();
+        }else{
+            return "No se pudo editar el user con id" + user.getId();
+        }
+    }
+
+
+}
+/*public class UserController {
     @Autowired
     UserService userService;
 
@@ -41,4 +76,4 @@ public class UserController {
         }
     }
 
-}
+}*/

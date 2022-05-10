@@ -1,7 +1,8 @@
 package com.example.valposystemsdemo.services;
 
+import com.example.valposystemsdemo.mapper.UserMapper;
 import com.example.valposystemsdemo.model.UserModel;
-import com.example.valposystemsdemo.repositories.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,36 @@ import java.util.Optional;
 //@CrossOrigin('https:\\localhost:4200');
 @Service
 public class UserService {
+    @Autowired
+    UserMapper userMapper;
+
+    public ArrayList<UserModel>findUsers(){
+        return (ArrayList<UserModel>) userMapper.findAll();
+    }
+    public boolean deleteUser(Long id){
+        try{
+            userMapper.deleteById(id);
+            return true;
+        }catch(Exception err){
+            return false;
+        }
+    }
+    public boolean putUser(UserModel user){
+        try{
+            userMapper.putUser(user.getEmail(),user.getUsername(),user.getId());
+            return true;
+        }catch(Exception err){
+            return false;
+        }
+    }
+    public UserModel saveUser(UserModel user){
+        UserModel u=user;
+        userMapper.save(user.getEmail(),user.getUsername());
+        return u;
+    }
+
+}
+/*public class UserService {
     @Autowired
     UserRepository userRepository;
 
@@ -35,4 +66,4 @@ public class UserService {
             return false;
         }
     }
-}
+}*/

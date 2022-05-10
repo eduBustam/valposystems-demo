@@ -1,13 +1,7 @@
 package com.example.valposystemsdemo.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "users")
 public class UserModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
+
     private Long id;
     private String username;
     private String email;

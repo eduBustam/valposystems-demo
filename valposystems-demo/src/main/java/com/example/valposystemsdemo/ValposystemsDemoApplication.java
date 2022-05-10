@@ -7,7 +7,7 @@ import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MappedTypes(UserModel.class)
-@MapperScan("com.example.valposystems.mapper")
+@MapperScan("com.example.valposystemsdemo.mapper")
 @SpringBootApplication
 public class ValposystemsDemoApplication {
 
